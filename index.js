@@ -13,11 +13,12 @@ let users = new Map();
 let messagesList = [];
 
 io.on('connection', (socket) => {
-    // TODO comment this part
-    let usersString = JSON.stringify(Array.from(users));
-    socket.emit('firstConnection', messagesList, usersString);
+    // Convert the Map to an array for JSON-encoded data over the wire
+    let usersArray = Array.from(users);
+    socket.emit('firstConnection', messagesList, usersArray);
     socket.on('login', user => {
         users.set(socket.id, user);
+        console.log(users);
         io.emit('login', user);
     });
     socket.on('message', user => {

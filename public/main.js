@@ -17,6 +17,7 @@
     let messageInput = document.querySelector('input[type="text"]');
     let colorForm = document.getElementById('colorForm');
     let currentColor = document.getElementById('currentColor');
+    // displayMessages : id of the div containing all the messages sent
 
     socket.emit('login', user);
 
@@ -72,8 +73,8 @@
         let notif = renderMessage(user, `has left !`);
         displayMessages.appendChild(notif);
     });
-    socket.on('firstConnection', (messagesList, usersString) => {
-        let newMap = new Map(JSON.parse(usersString));
+    socket.on('firstConnection', (messagesList, usersArray) => {
+        let newMap = new Map(usersArray);
         messagesList.forEach(message => {
             let user = newMap.get(message[0]);
             displayMessages.appendChild(renderMessage(user, message[1]));
