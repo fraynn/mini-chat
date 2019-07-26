@@ -32,7 +32,5 @@ io.on('connection', (socket) => {
     socket.on('disconnect', () => {
         socket.broadcast.emit('disconnected', users.get(socket.id));
     })
-    // socket.on('mousemoving', (mouseCoordinates) => socket.broadcast.emit('mousemoving', mouseCoordinates))
-    // socket.on('mouseclick', (mouseCoordinates) => io.emit('mouseclick', mouseCoordinates))
 })
 

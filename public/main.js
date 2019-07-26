@@ -1,3 +1,4 @@
+// IIFE (Immediately Invoked Function Expression) to avoid polluting the global namespace
 (function () {
     let user = {
         pseudo: setPseudo(),
@@ -44,7 +45,6 @@
         socket.emit('changedColor', user)
     })
 
-
     function setUserColor(color) {
         let colorInput = document.getElementById('colorPicker');
         let userColor = color ? color : colorInput.value;
@@ -80,6 +80,7 @@
             displayMessages.appendChild(renderMessage(user, message[1]));
         });
     });
+    // TODO : broken selector : use data attribute with user ID
     socket.on('updateColor', user => {
         let userMessages = document.querySelectorAll(`span[style="color:${user.previousColor}"]`);
         console.log(user);
@@ -87,35 +88,4 @@
             span.style.color = user.color;
         });
     })
-
-    // function getMousePosition(evt) {
-    //     let mouseCoordinates = {
-    //         posX: evt.clientX,
-    //         posY: evt.clientY
-    //     }
-    //     return mouseCoordinates;
-    // }
-
-    // document.body.addEventListener('mousemove', evt => {
-    //     mouseCoordinates = getMousePosition(evt);
-    //     socket.emit('mousemoving', mouseCoordinates)
-    // });
-    // document.body.addEventListener('click', evt => {
-    //     mouseCoordinates = getMousePosition(evt);
-    //     socket.emit('mouseclick', mouseCoordinates)
-    // });
-
-    // socket.on('mousemoving', (mouseCoordinates) => {
-    //     let mouse = document.querySelector('.mouse');
-    //     mouse.style.left = mouseCoordinates.posX + 'px';
-    //     mouse.style.top = mouseCoordinates.posY + 'px';
-    // });
-    // socket.on('mouseclick', (mouseCoordinates) => {
-    //     let clickPosition = document.createElement('div');
-    //     clickPosition.classList.add('mouse');
-    //     clickPosition.style.left = mouseCoordinates.posX + 'px';
-    //     clickPosition.style.top = mouseCoordinates.posY + 'px';
-    //     clickPosition.style.backgroundColor = 'red';
-    //     document.body.appendChild(clickPosition);
-    // });
 })();
