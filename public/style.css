@@ -12,15 +12,16 @@ body {
     flex-direction: column;
     height: 100%;
 }
+/* Needed for auto scrolling when new messages arrive */
 #messagesWrapper {
     display: flex;
     flex-direction: column-reverse;
     overflow-y: auto;
+    flex-grow: 1;
+    padding: 1em;
 }
 #displayMessages {
     flex-grow: 1;
-    padding: 1em;
-    flex-basis: 100%;
 }
 #colorForm {
     display: flex;
